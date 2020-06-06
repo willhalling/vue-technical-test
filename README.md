@@ -14,7 +14,7 @@ I've added Vuex to manage the state.
 
 I've added SCSS and used BEM methodology.
 
-For info: I've saved the movies.json api locally so I can send a preview link using Netlify (which uses HTTPS).
+For info: I've saved the movies.json api locally so I can send a preview link.
 
 ## Preview link
 [http://vue-technical-test.s3-website.eu-central-1.amazonaws.com/](http://vue-technical-test.s3-website.eu-central-1.amazonaws.com/)
