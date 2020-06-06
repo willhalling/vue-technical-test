@@ -4,8 +4,8 @@
     <div class="home__carousel">
       <VueSlickCarousel v-if="videos.length > 0" :arrows="true" :dots="true" v-bind="settings">
         <div v-for="(video, index) in videos" :key="index">
-          <router-link :to="`/video/${index}-${slugify(video.title)}`">
-            <img :src="video.poster"/>
+          <router-link :title="video.title" :to="`/video/${index}-${slugify(video.title)}`">
+            <img :src="video.poster" :alt="video.title"/>
           </router-link>
         </div>
       </VueSlickCarousel>
@@ -84,6 +84,7 @@ export default {
       img {
         max-height: $carousel-thumb-height;
         width: 100%;
+        pointer-events: none;
       }
     }
   }
