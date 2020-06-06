@@ -11,7 +11,7 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/video/:index',
+    path: '/video/:title',
     name: 'Video',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

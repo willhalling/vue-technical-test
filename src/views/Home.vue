@@ -1,9 +1,10 @@
 <template>
   <div class="home">
+    <heading>Technical Test | Will Halling</heading>
     <div class="home__carousel">
       <VueSlickCarousel v-if="videos.length > 0" :arrows="true" :dots="true" v-bind="settings">
         <div v-for="(video, index) in videos" :key="index">
-          <router-link :to="`/video/${index}`">
+          <router-link :to="`/video/${index}-${slugify(video.title)}`">
             <img :src="video.poster"/>
           </router-link>
         </div>
@@ -13,8 +14,11 @@
 </template>
 
 <script>
+import { slugify } from '../utils/url'
 import { mapGetters, mapActions } from 'vuex'
 import VueSlickCarousel from 'vue-slick-carousel'
+import Heading from '@/components/Heading.vue'
+import { CONFIG } from '../constants/config.js'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 // style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
@@ -22,6 +26,7 @@ import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 export default {
   name: 'Home',
   components: {
+    Heading,
     VueSlickCarousel
   },
   data() {
@@ -39,18 +44,21 @@ export default {
     }
   },
   mounted() {
-    const api = 'http://hybridtv.ss7.tv/techtest/movies.json'
+    const api = CONFIG.url
     this.getAllVideos(api)
   },
   computed: {
     ...mapGetters({
-      'videos': 'video/videos'
+      'videos': 'movie/videos'
     })
   },
   methods: {
     ...mapActions({
-      'getAllVideos': 'video/getAllVideos'
+      'getAllVideos': 'movie/getAllVideos'
     }),
+    slugify(string) {
+      return slugify(string)
+    }
   }
 }
 </script>

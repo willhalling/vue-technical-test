@@ -24,12 +24,13 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: $body-colour;
+    padding: 0 0 $default-spacing * 2;
   }
 
   #nav {
     padding: $default-spacing;
     border-bottom: 1px solid $body-colour;
-    margin-bottom: $default-spacing;
+    margin-bottom: 0;
     a {
       font-weight: bold;
       color: #000;

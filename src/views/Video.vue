@@ -1,6 +1,6 @@
 <template>
   <div class="video">
-    <h1 class="video__title">{{ video.title }}</h1>
+    <heading>{{ video.title }}</heading>
     <div class="video__player" @click="togglePlay">
       <video ref="videoPlayer" class="video-js video__element"></video>
       <play-button class="video__button" :playing="playing" />
@@ -9,8 +9,11 @@
 </template>
 
 <script>
+  /* eslint-disable no-debugger */
   import videojs from 'video.js';
   import { mapGetters, mapActions } from 'vuex'
+  import { CONFIG } from '../constants/config.js'
+  import Heading from '@/components/Heading.vue'
   import PlayButton from '@/components/PlayButton.vue'
 
   require('video.js/dist/video-js.css')
@@ -18,6 +21,7 @@
   export default {
     name: 'Video',
     components: {
+      Heading,
       PlayButton
     },
     data() {
@@ -27,9 +31,11 @@
       }
     },
     async mounted() {
-      const index = Number(this.$route.params.index)
+      const title = this.$route.params.title
+      // grab index from url string
+      const index = Number(title.split('-')[0])
       const apiParams = {
-        url: 'http://hybridtv.ss7.tv/techtest/movies.json',
+        url: CONFIG.url,
         index
       }
       await this.getSingleVideo(apiParams)
@@ -37,12 +43,12 @@
     },
     computed: {
       ...mapGetters({
-        'video': 'video/video'
+        'video': 'movie/video'
       })
     },
     methods: {
       ...mapActions({
-        'getSingleVideo': 'video/getSingleVideo'
+        'getSingleVideo': 'movie/getSingleVideo'
       }),
       initVideo() {
         const options = {
